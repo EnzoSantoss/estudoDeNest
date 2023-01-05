@@ -7,10 +7,11 @@ import {
   Param,
   Patch,
   Post,
-  Res,
 } from '@nestjs/common';
 import { Delete } from '@nestjs/common/decorators/http/request-mapping.decorator';
 import { CoursesService } from './courses.service';
+import { CreateCourseDto } from './dto/create-course-dto';
+import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Controller('courses')
 export class CoursesController {
@@ -28,15 +29,15 @@ export class CoursesController {
   }
 
   @Post()
-  @HttpCode(HttpStatus.NO_CONTENT)
-  create(@Body() body) {
-    return this.coursesService.create(body);
+  //@HttpCode(HttpStatus.NO_CONTENT)
+  create(@Body() createCourseDto: CreateCourseDto) {
+    return this.coursesService.create(createCourseDto);
     //return body;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body) {
-    return this.coursesService.update(id, body);
+  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
+    return this.coursesService.update(id, updateCourseDto);
     //return `Atualização do curso ${id}`;
   }
 
